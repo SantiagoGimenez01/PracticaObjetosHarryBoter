@@ -3,6 +3,7 @@ class Casa{
 
     method agregar(estudiante){ 
         estudiantes.add(estudiante) 
+        estudiante.casa(self)
     }
     method proximaCasa()
     method integrantesPuros() = estudiantes.count({estudiante => estudiante.aceitePuro()})
@@ -31,4 +32,8 @@ object hufflepuff inherits Casa{
 object ravenclaw inherits Casa{
    
     override method proximaCasa() = gryffindor
+}
+
+object nula{
+    
 }
