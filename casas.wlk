@@ -1,3 +1,5 @@
+import bots.*
+
 class Casa{
     const estudiantes = []
 
@@ -9,6 +11,9 @@ class Casa{
     method integrantesPuros() = estudiantes.count({estudiante => estudiante.aceitePuro()})
     method integrantesSucios() = estudiantes.count({estudiante => !estudiante.aceitePuro()})
     method esPeligrosa() = self.integrantesSucios() > self.integrantesPuros()
+    method atacarBotMaligno(){
+        estudiantes.forEach({estudiante => estudiante.lanzarA(estudiante.ultimoHechizo(), botMaligno)})
+    }
 }
 
 object gryffindor inherits Casa{
@@ -35,5 +40,5 @@ object ravenclaw inherits Casa{
 }
 
 object nula{
-    
+
 }

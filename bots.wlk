@@ -13,7 +13,7 @@ class Bot{
 } 
 
 class BotInteresante inherits Bot{
-    const hechizos = []
+    const hechizos = #{}
     var property casa = nula
 
     method lanzarA(hechizo, alguien){
@@ -30,6 +30,7 @@ class BotInteresante inherits Bot{
 class Estudiante inherits BotInteresante{
 
     method aprender(hechizo) = hechizos.add(hechizo)
+    method ultimoHechizo() = hechizos.last()
 }
 
 class Profesor inherits BotInteresante{
@@ -56,3 +57,5 @@ object sombreroSeleccionador inherits Bot{
     override method ensuciarAceite(){}
 
 }
+
+const botMaligno = new Bot(cargaElectrica = 200, aceitePuro = false)
