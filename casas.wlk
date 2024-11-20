@@ -5,16 +5,21 @@ class Casa{
         estudiantes.add(estudiante) 
     }
     method proximaCasa()
+    method integrantesPuros() = estudiantes.count({estudiante => estudiante.aceitePuro()})
+    method integrantesSucios() = estudiantes.count({estudiante => !estudiante.aceitePuro()})
+    method esPeligrosa() = self.integrantesSucios() > self.integrantesPuros()
 }
 
 object gryffindor inherits Casa{
 
     override method proximaCasa() = slytherin
+    override method esPeligrosa() = false
 }
 
 object slytherin inherits Casa{
 
     override method proximaCasa() = hufflepuff
+    override method esPeligrosa() = true
 }
 
 object hufflepuff inherits Casa{

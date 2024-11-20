@@ -1,10 +1,19 @@
 import casas.*
+import materias.*
 
 class Bot{
-    var energiaElectrica = 100
+    var cargaElectrica = 100
 }
 
 class Estudiante inherits Bot{
+    var property aceitePuro
+    const hechizos = []
+
+
+    method aprender(hechizo) = hechizos.add(hechizo)
+}
+
+class Profesor inherits Bot{
 
 }
 
