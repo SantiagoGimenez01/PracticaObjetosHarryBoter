@@ -7,14 +7,14 @@ object inmobilus{
 }
 
 object sectumSempra{
-    method efecto(afectado){ if(afectado.aceitePuro()) afectado.aceitePuro(false) }
+    method efecto(afectado){ if(afectado.aceitePuro()) afectado.ensuciarAceite() }
     method cumpleCondiciones(lanzador) = lanzador.esExperimentado()
 }
 
 object avadaKedabra{
 
     method efecto(afectado) = afectado.anularCarga()
-    method cumpleCondiciones(lanzador) = lanzador.ensuciarAceite() || lanzador.perteneceACasaPeligrosa()
+    method cumpleCondiciones(lanzador) = !lanzador.aceitePuro() || lanzador.perteneceACasaPeligrosa()
 }
 
 class HechizoComun{

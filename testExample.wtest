@@ -1,0 +1,74 @@
+import bots.*
+import casas.*
+import hechizos.*
+import materias.*
+
+describe "Pruebas" {
+  const harryBotter = new Estudiante(cargaElectrica = 80)
+  const dracoMalfoy = new Estudiante(aceitePuro = true)
+  const boty = new Estudiante()
+  const chatGPT = new Estudiante()
+  const hermioneGranger = new Estudiante()
+  const grupoDeEstudiantes = [harryBotter, dracoMalfoy, boty, chatGPT, hermioneGranger]
+  const severus = new Profesor(casa = slytherin)
+  const defensaVsHackeos = new Materia(hechizo = inmobilus)
+  const hechizoNormal = new HechizoComun(cargaDisminuida = 60)
+  const albus = new Profesor(materiasDictadas = 5, hechizos = [inmobilus, sectumSempra, curacion, hechizoNormal], casa = gryffindor, aceitePuro = true)
+  
+  test "Un grupo de estudiantes es asignado correctamente a las respectivas casas" {
+    sombreroSeleccionador.asignarGrupo(grupoDeEstudiantes)
+    assert.equals(gryffindor, harryBotter.casa())
+    assert.equals(slytherin, dracoMalfoy.casa())
+    assert.equals(hufflepuff, boty.casa())
+    assert.equals(ravenclaw, chatGPT.casa())
+    assert.equals(gryffindor, hermioneGranger.casa())
+
+  }
+
+  test "La materia  - Defensa contra los hackeos oscuros - enseña su hechizo correctamente" {
+    defensaVsHackeos.asignarProfesor(severus)
+    defensaVsHackeos.enseniar(grupoDeEstudiantes)
+    assert.that(harryBotter.tiene(inmobilus))
+    assert.that(dracoMalfoy.tiene(inmobilus))
+    assert.that(boty.tiene(inmobilus))
+    assert.that(chatGPT.tiene(inmobilus))
+    assert.that(hermioneGranger.tiene(inmobilus))
+
+  }
+  test "Testeo de Harry, Draco y el sombrero seleccionador" {
+    sombreroSeleccionador.asignarGrupo(grupoDeEstudiantes)
+
+    defensaVsHackeos.asignarProfesor(severus)
+    defensaVsHackeos.enseniar(grupoDeEstudiantes)
+    harryBotter.aprender(sectumSempra)
+    harryBotter.aprender(curacion)
+    harryBotter.aprender(hechizoNormal)
+
+    harryBotter.lanzarA(sectumSempra, dracoMalfoy)
+    harryBotter.lanzarA(sectumSempra, sombreroSeleccionador)
+
+    assert.notThat(dracoMalfoy.aceitePuro())
+    assert.that(sombreroSeleccionador.aceitePuro())
+
+  
+
+  }
+  test "Testeo de Draco y Albus" {
+    sombreroSeleccionador.asignarGrupo(grupoDeEstudiantes)
+    dracoMalfoy.aprender(avadaKedabra)
+
+    albus.lanzarA(albus.ultimoHechizo(), dracoMalfoy)
+    assert.equals(40, dracoMalfoy.cargaElectrica())
+
+    dracoMalfoy.lanzarA(avadaKedabra, albus)
+    assert.equals(50, albus.cargaElectrica())
+
+    assert.throwsExceptionWithMessage("El lanzador no puede lanzar el hechizo", { albus.lanzarA(albus.ultimoHechizo(), dracoMalfoy) })
+    assert.equals(40, dracoMalfoy.cargaElectrica())
+
+
+
+
+  }
+
+}

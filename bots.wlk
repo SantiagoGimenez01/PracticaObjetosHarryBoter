@@ -12,7 +12,7 @@ class Bot{
     method ensuciarAceite(){ aceitePuro = false }
 } 
 
-class BotInteresante inherits Bot{
+class Estudiante inherits Bot{
     const hechizos = #{}
     var property casa = nula
 
@@ -25,16 +25,13 @@ class BotInteresante inherits Bot{
     method esExperimentado() = hechizos.size() > 3 && cargaElectrica > 50
     method puedeLanzarlo(hechizo) = self.tiene(hechizo) && self.estaActivo() && hechizo.cumpleCondiciones(self)
     method tiene(hechizo) = hechizos.contains(hechizo)
-}
-
-class Estudiante inherits BotInteresante{
-
-    method aprender(hechizo) = hechizos.add(hechizo)
     method ultimoHechizo() = hechizos.last()
+    method aprender(hechizo) = hechizos.add(hechizo)
+    method perteneceACasaPeligrosa() = casa.esPeligrosa()
 }
 
-class Profesor inherits BotInteresante{
-    var materiasDictadas
+class Profesor inherits Estudiante{
+    var materiasDictadas = 0
 
     override method disminuirCarga(cantidad) { super(0) }
     override method esExperimentado() = super() && materiasDictadas >= 2
