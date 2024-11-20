@@ -2,11 +2,12 @@ import casas.*
 import materias.*
 
 class Bot{
-    var cargaElectrica = 100
+    var property cargaElectrica = 100
     var property aceitePuro = true
 
     method estaActivo() = cargaElectrica > 0
     method disminuirCarga(cantidad){ cargaElectrica -= cantidad }
+    method aumentarCarga(cantidad){ cargaElectrica += cantidad }
     method anularCarga(){ cargaElectrica = 0 }
     method ensuciarAceite(){ aceitePuro = false }
 } 
