@@ -11,8 +11,8 @@ class Casa{
     method integrantesPuros() = estudiantes.count({estudiante => estudiante.aceitePuro()})
     method integrantesSucios() = estudiantes.count({estudiante => !estudiante.aceitePuro()})
     method esPeligrosa() = self.integrantesSucios() > self.integrantesPuros()
-    method atacarBotMaligno(){
-        estudiantes.forEach({estudiante => estudiante.lanzarA(estudiante.ultimoHechizo(), botMaligno)})
+    method atacarA(alguien){
+        estudiantes.forEach({estudiante => estudiante.lanzarA(estudiante.ultimoHechizo(), alguien)})
     }
 }
 
